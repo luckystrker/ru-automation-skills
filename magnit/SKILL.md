@@ -12,6 +12,8 @@ description: Магнит (magnit.ru) — заказ продуктов чере
 ## Быстрый старт
 
 ```sh
+cd scripts
+
 # магазины вокруг точки (координаты — центра города или адреса)
 node tools/magnit.mjs stores --lat <широта> --lon <долгота> --radius 0.03
 

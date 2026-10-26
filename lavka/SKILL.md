@@ -11,7 +11,7 @@ description: Яндекс Лавка (lavka.yandex.ru) — экспресс-до
 ## Быстрый старт
 
 ```sh
-cd <repo>                                  # каталог со скриптами stores/
+cd scripts                                 # каталог со скриптами (см. README)
 
 xvfb-run -a node stores/lavka.mjs probe            # адрес, корзина, проверка поиска (ничего не меняет)
 xvfb-run -a node stores/lavka.mjs search "молоко"  # поиск с ценами

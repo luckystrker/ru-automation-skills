@@ -19,7 +19,7 @@ description: Покупки в «Ярче+» (yarcheplus.ru) через брау
 ## Быстрый старт
 
 ```sh
-cd <repo>                                  # каталог со скриптами stores/
+cd scripts                                 # каталог со скриптами (см. README)
 
 node stores/yarche.mjs search "молоко" --limit 10   # поиск: имя, цена, наличие
 node stores/yarche.mjs search "сыр" --json          # то же машинночитаемо

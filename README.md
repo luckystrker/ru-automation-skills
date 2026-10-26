@@ -15,13 +15,58 @@
 Общее у всех трёх: нужен **российский IP** (магазины не открываются с зарубежных),
 **headed-браузер** (капчи не проходят в headless) и **живой аккаунт** для корзины.
 
+## Скрипты
+
+Скиллы ссылаются на готовые скрипты — они лежат в `scripts/` и запускаются из этого каталога:
+
+```
+scripts/
+├── stores/
+│   ├── yarche.mjs              поиск и корзина Ярче+ (Playwright)
+│   ├── yarche-login.mjs        вход по SMS + KDV ID
+│   ├── yarche-fill-cart.mjs    пакетная сборка корзины по списку
+│   ├── yarche-price-list.mjs   варианты товаров с ценами
+│   ├── yarche-quick.mjs        быстрый поиск по нескольким запросам
+│   ├── lavka.mjs               Лавка: probe/search/cart/demo/screenshot
+│   ├── lavka-login.mjs         вход в Лавку
+│   ├── lavka-login-continue.mjs продолжение входа после SMS
+│   ├── lavka-check.mjs         проверка сессии
+│   ├── magnit-login.mjs        вход в Магнит по SMS + капча
+│   ├── proxy.mjs               чтение proxy.env, прокси для Playwright
+│   ├── playwright.mjs          поиск установленного Playwright
+│   └── verify-proxy.mjs        проверка российского выхода
+└── tools/
+    ├── magnit.mjs              API Магнита: stores/search/categories/product
+    └── magnit-fill.mjs         сборка корзины Магнита по списку
+```
+
+Все команды в скиллах выполняются из `scripts/`:
+
+```sh
+cd scripts
+node tools/magnit.mjs stores --lat <широта> --lon <долгота>
+xvfb-run -a node stores/lavka.mjs probe
+```
+
+### Настройка
+
+| Переменная | Что задаёт |
+|---|---|
+| `STORE_PROXY` / `BROWSER_PROXY` | прокси в `stores/proxy.env` (SOCKS5 или HTTP с логином) |
+| `LAVKA_CITY` | код города Яндекс.Карт для Лавки (значение по умолчанию — в скрипте) |
+| `LAVKA_PHONE` | телефон для входа в Лавку |
+| `MAGNIT_STORE` | код магазина Магнита по умолчанию |
+| `MAGNIT_PROFILE` | каталог профиля браузера Магнита |
+
+Телефоны и коды в репозитории не хранятся: они передаются аргументом или переменной окружения.
+
 ## Требования
 
 - Node.js 22.19+ и Playwright с Chromium;
 - `xvfb-run` для виртуального экрана (Linux);
 - SOCKS5-прокси с российским выходом, доступный на `127.0.0.1:8890` (SSH-туннель или свой);
 - аккаунт в магазине и доступ к SMS владельца аккаунта;
-- скрипты-обёртки из вашего проекта в `stores/` и `tools/` (см. разделы «Готовые скрипты» в каждом скилле).
+- скрипты из `scripts/` этого репозитория (см. раздел «Скрипты»).
 
 ## Как подключить
 
